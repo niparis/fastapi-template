@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fastapi-template"
-version = "0.0.3"
+version = "0.0.4"
 description = "High-performance Async REST API, in Python. Implements the Hexagonal architecture (simplified clean architecture)"
 authors = ["Nicolas Paris <ni.paris@gmail.com>"]
 

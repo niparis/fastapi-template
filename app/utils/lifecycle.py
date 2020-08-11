@@ -41,7 +41,4 @@ def commit_new_version_and_push() -> None:
         subprocess.run(
             ["git", "tag", "-a", f"v{version}", "-m", f"v{version}"]
         )
-        subprocess.run(
-            ["git", "tag", "-a", f"v{version}", "-m", f"v{version}"]
-        )
         subprocess.run(["git", "push", "--follow-tags"], check=True)
