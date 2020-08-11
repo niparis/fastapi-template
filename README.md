@@ -66,12 +66,19 @@ Go to http://127.0.0.1:8000/doc for the swagger doc
 
 All commands to be executed after `poetry shell`
 
+### Development
 - poetry run app : Runs the app with the dev server
 - poetry run app-prod: Runs the app with the production server
 - poetry run manage db-sync: Syncs changes to the DDL file (`database-schema.sql`) to the database and the sqlalchemy models
+- poetry run test : Runs the test suite
 
+### Release
 - poetry version <patch|minor|major>: updates the version 
 - poetry run task manage commit-new-version: updates git tag, add changed files, commits, pushes (including version)
+
+### Docker
+- poetry run compose-up : Runs the app in docker
+- poetry run compose-down : Kills the docker container in a good way
 
 
 ## notes
