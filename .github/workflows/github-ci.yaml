@@ -25,6 +25,16 @@ jobs:
        poetry install
     - name: Install run pre-commit
       run: |
-       pre-commit install
+       poetry run pre-commit install
        poetry run pre-commit run --all-files
+    - name: Lint
+      run: |
+        ./scripts/lint.sh > lint-results.txt
+    - name: Upload lint results
+      uses: actions/upload-artifact@v2
+      with:
+        name: Lint
+        path: lint-results.txt
+
+
       
