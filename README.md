@@ -1,4 +1,4 @@
-# FAST-api base service (
+# FAST-api base service
 
 Using [fastapi](https://fastapi.tiangolo.com)
 
