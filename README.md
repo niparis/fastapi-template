@@ -1,12 +1,14 @@
 # FAST-api base service
 
-Using [fastapi](https://fastapi.tiangolo.com)
+
 
 Implementing the [hexagonal architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)), a simplified version of the Clean architecture from uncle bob.
 
 ## Stack
 
-
+- Using [fastapi](https://fastapi.tiangolo.com), a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
+- An async database driver, using [encode](https://www.encode.io/databases/) and [asyncpg](https://github.com/MagicStack/asyncpg), the fastest Postgres database driver for python
+- Environment and dependencies handled by [poetry](https://python-poetry.org/)
 - Automatic code formatting using [Black](https://black.readthedocs.io/en/stable/installation_and_usage.html#) and automatic sorting of imports using [isort](https://github.com/timothycrosley/isort)
 
 ## Preparation
