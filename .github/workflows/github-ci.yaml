@@ -73,7 +73,7 @@ jobs:
 
     - name: Run tests
       run: |
-        poetry run task tests
+        poetry run task test
       
     - name: Upload test artifacts
       uses: actions/upload-artifact@v2
