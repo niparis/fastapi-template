@@ -37,6 +37,12 @@ sqlacodegen = "^2.3.0"
 taskipy = "^1.2.1"
 sqlbag = "^0.1.1579049654"
 migra = "^1.0.1596263757"
+cruft = "^1.3.0"
+mypy = "^0.782"
+safety = "^1.9.0"
+vulture = "^1.6"
+radon = "^4.2.0"
+pep8-naming = "^0.11.1"
 
 [tool.taskipy.tasks]
 # Launch Commands for Local Development
@@ -55,9 +61,7 @@ max-line-length = 79
 max-complexity = 18
 select = "B,C,E,F,W,T4,B9"
 per-file-ignores ="""
-    app/models/orm/migrations/env.py:E402
     app/main.py:E402
-    app/worker.py:E402
 """
 [tool.black]
 line-length = 79
@@ -70,10 +74,7 @@ exclude = '''
   | dist
   | .scripts
   | .git-crypt
-  | services/.scripts
-  | services/.vscode
-  | core/.scripts
-  | core/.vscode
+  | app/infrastructure/database/sqla_tables.py
 )/
 '''
 

@@ -4,6 +4,11 @@ Using [fastapi](https://fastapi.tiangolo.com)
 
 Implementing the [hexagonal architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)), a simplified version of the Clean architecture from uncle bob.
 
+## Stack
+
+
+- Automatic code formatting using [Black](https://black.readthedocs.io/en/stable/installation_and_usage.html#) and automatic sorting of imports using [isort](https://github.com/timothycrosley/isort)
+
 ## Preparation
 
 ### Install Python 3.8

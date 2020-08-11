@@ -2,15 +2,7 @@ import secrets
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import (
-    AnyHttpUrl,
-    BaseSettings,
-    EmailStr,
-    HttpUrl,
-    PostgresDsn,
-    validator,
-)
-from starlette.datastructures import CommaSeparatedStrings, Secret
+from pydantic import BaseSettings, PostgresDsn, validator
 
 
 class Settings(BaseSettings):
@@ -19,7 +11,7 @@ class Settings(BaseSettings):
     DDL_PATH: Path = CODE_PATH / "app" / "infrastructure" / "database" / "migrations"
     MODELS_PATH: Path = CODE_PATH / "app" / "infrastructure" / "database" / "models"
 
-    DB_NAME: str = None
+    DB_NAME: Optional[str] = None
     DB_USER: Optional[str] = None
     DB_PASSWORD: Optional[str] = None
     DB_HOST: str = "localhost"

@@ -11,4 +11,4 @@ from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-db = Database(settings.SQLALCHEMY_DATABASE_URI)
+db = Database(str(settings.SQLALCHEMY_DATABASE_URI))

@@ -21,7 +21,9 @@ def export_all_tables(settings):
         encoding="utf-8",
     )
     generator = CodeGenerator(metadata, noclasses=True)
+    generator.collector["sqlalchemy"].add("Text")
     generator.render(outfile)
+    print("SQLAlchemy tables have been updated")
 
 
 def sync(settings, silent: bool = True):

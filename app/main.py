@@ -7,7 +7,6 @@ sys.path.extend(["./"])
 from sentry_sdk import init as initialize_sentry
 from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
-from starlette.datastructures import Secret
 from fastapi import FastAPI
 
 # from app.application import app

@@ -1,4 +1,4 @@
-from enum import Enum, IntEnum
+from enum import Enum
 from typing import Optional
 
 import orjson
