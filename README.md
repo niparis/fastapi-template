@@ -1,8 +1,8 @@
-# FAST-api base service (datapipes-ingestor)
+# FAST-api base service (
 
-https://fastapi.tiangolo.com
+Using [fastapi](https://fastapi.tiangolo.com)
 
-Implementing the [hexagonal architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)), a simplified version of the Clean architecture from uncle bob.git remote add origin git@github.com:cldcvr/datapipes-ingestor.git
+Implementing the [hexagonal architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)), a simplified version of the Clean architecture from uncle bob.
 
 ## Preparation
 
@@ -22,7 +22,7 @@ https://postgresapp.com
 
 ## first time
 
-1. Create a copy of the settings (`cp .dist.env .env`). Modify the database user, it should be your system user if you're using postgresapp.
+1. Create a copy of the settings (`cp .dist.env .env`). Modify the database user (`DB_USER`) - unless you're bob - , it should be your system user if you're using postgresapp.
 2. Create a database (`psql -c "create database asyncfast;"`). This requires having postgres running (use postgresapp).
 3. Install depencies and create a virtual environment (`poetry install`)
 4. Activate the virtual environment (`poetry shell`)
@@ -69,10 +69,14 @@ All commands to be executed after `poetry shell`
 - poetry run app : Runs the app with the dev server
 - poetry run app-prod: Runs the app with the production server
 - poetry run manage db-sync: Syncs changes to the DDL file (`database-schema.sql`) to the database and the sqlalchemy models
-- poetry version <patch|minor|major>: updates the version (does not update the git tag !!)
+
+- poetry version <patch|minor|major>: updates the version 
+- poetry run task manage commit-new-version: updates git tag, add changed files, commits, pushes (including version)
 
 
 ## notes
+
+Couple of caveats:
 
 - tests are currently broken
 - some endpoints still are using the old sync model
