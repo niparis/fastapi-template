@@ -9,12 +9,29 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:12.3
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Python 
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+
     - name: Cache Poetry virtualenv
       uses: actions/cache@v1
       id: cache
@@ -23,30 +40,43 @@ jobs:
         key: poetry-${{ hashFiles('**/poetry.lock') }}
         restore-keys: |
           poetry-${{ hashFiles('**/poetry.lock') }}
+
     - name: Install poetry
       run: |
        python -m pip install --upgrade pip
        pip install poetry==1.0.9
+
     - name: Install dependencies
       run: poetry install
       if: steps.cache.outputs.cache-hit != 'true'
+
     - name: cache pre-commit
       uses: actions/cache@v1
       with:
         path: ~/.cache/pre-commit
         key: pre-commit|${{ matrix.python }}|${{ hashFiles('.pre-commit-config.yaml') }}
+
     - name: Install run pre-commit
       run: |
        poetry run pre-commit install
        poetry run pre-commit run --all-files
+
     - name: Lint
       run: |
         ./scripts/lint.sh > lint-results.txt
+
     - name: Upload lint results
       uses: actions/upload-artifact@v2
       with:
-        name: Lint
+        name: lint-results
         path: lint-results.txt
 
-
+    - name: Run tests
+      run: |
+        poetry run task tests
       
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-artifacts
+        path: .artifacts/*.xml

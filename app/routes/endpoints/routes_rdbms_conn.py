@@ -5,7 +5,6 @@ from fastapi.responses import JSONResponse, ORJSONResponse
 from sqlalchemy.orm import Session
 from starlette import status
 
-from app.api.servicesfac import get_rdbms_connections_service
 from app.domain.rdbms_connections.rdbms_connections_schema import (
     RDBMSConnectionsCreateSchema,
     RDBMSConnectionsDB,
@@ -14,6 +13,7 @@ from app.domain.rdbms_connections.rdbms_connections_schema import (
 from app.domain.rdbms_connections.rdbms_connections_service import (
     RDBMSConnectionsService,
 )
+from app.routes.servicesfac import get_rdbms_connections_service
 from app.utils.exceptions import EntityNotFound
 
 router = APIRouter()

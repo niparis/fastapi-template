@@ -56,7 +56,9 @@ Go to http://127.0.0.1:8000/doc for the swagger doc
 7. Create a new *router* as a new file in the `api/endpoints` folder)
 8. Link the router to the main router in `api.py`
 
+## run tests
 
+1. psql -c "create database asyncfast_test;"
 
 ## code organisation
 

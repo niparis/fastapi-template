@@ -3,7 +3,7 @@ from ..models.orm.user import User as ORMUser
 from ..models.pydantic.user import User
 
 
-async def send_message(user_id: int, message: str):
+async def send_message(user_id: int, message: str) -> User:
     # TODO: Add a messaging service.
     orm_user: ORMUser = await ORMUser.get(user_id)
     user: User = User.from_orm(orm_user)

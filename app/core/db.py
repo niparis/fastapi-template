@@ -1,14 +1,13 @@
 import logging
+import os
 
 from databases import Database
 
 from app.core.config import settings
 
-# from sqlalchemy import create_engine
-# from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy.orm import sessionmaker
-
-
 logger = logging.getLogger(__name__)
 
-db = Database(str(settings.SQLALCHEMY_DATABASE_URI))
+if os.environ.get("TESTING") == "Test":
+    db = Database(str(settings.SQLALCHEMY_DATABASE_URI), force_rollback=True)
+else:
+    db = Database(str(settings.SQLALCHEMY_DATABASE_URI))

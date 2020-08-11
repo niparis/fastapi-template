@@ -11,10 +11,6 @@ def export_all_tables(settings):
     engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
     metadata = MetaData(engine)
     metadata.reflect(engine, "public", False, None)
-
-    # for _, table_obj in metadata.tables.items():
-    #     single_metadata = MetaData(engine)
-    #     single_metadata.reflect(engine, "public", False, [table_obj.name])
     outfile = io.open(
         os.path.join(settings.MODELS_PATH, "sqla_tables.py"),
         "w",

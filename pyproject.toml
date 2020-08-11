@@ -43,6 +43,7 @@ safety = "^1.9.0"
 vulture = "^1.6"
 radon = "^4.2.0"
 pep8-naming = "^0.11.1"
+sqlalchemy-stubs = "^0.3"
 
 [tool.taskipy.tasks]
 # Launch Commands for Local Development

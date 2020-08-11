@@ -10,7 +10,7 @@ from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 from fastapi import FastAPI
 
 # from app.application import app
-from app.api.api import api_router
+from app.routes.api import api_router
 from app.core.config import settings
 from app.core.db import db
 from app.utils.middleware import PerformanceMonitoringMiddleware
@@ -30,11 +30,16 @@ def create_app() -> FastAPI:
         )
 
     logger.info("Initiliase fast-API app")
-    app = FastAPI(on_startup=[db.connect], on_shutdown=[db.disconnect])
+    app = FastAPI(
+        title=SERVICE_NAME,
+        version=__version__,
+        on_startup=[db.connect],
+        on_shutdown=[db.disconnect],
+    )
     # db.init_app(app=app)
 
     @api_router.get("/")
-    async def healthcheck():
+    async def healthcheck() -> dict:
         """
             Checks that we are connected to database and return service information
         """

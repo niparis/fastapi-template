@@ -5,13 +5,13 @@ from fastapi.responses import ORJSONResponse
 from sqlalchemy.orm import Session
 from starlette import status
 
-from app.api.servicesfac import get_user_services
 from app.domain.users.users_schema import (
     UserCreateSchema,
     UserDBSchema,
     UserUpdateSchema,
 )
 from app.domain.users.users_service import UserService
+from app.routes.servicesfac import get_user_services
 
 router = APIRouter()
 

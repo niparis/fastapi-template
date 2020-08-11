@@ -1,4 +1,6 @@
 import datetime as dt
+import logging
+import os
 from typing import Any, List
 
 import pytest
@@ -6,57 +8,61 @@ from fastapi import FastAPI
 from starlette import status
 from starlette.testclient import TestClient
 
-from app.models.orm.user import User as UserDB
-from app.models.pydantic.user import User, UserCreateIn, UserUpdateIn
-from app.routes.users import router
+from app.core.db import db
+from app.domain.users.users_schema import (
+    UserBase,
+    UserCreateSchema,
+    UserDBSchema,
+    UserUpdateSchema,
+)
+from app.main import create_app
+from app.routes.endpoints.routes_users import router
 
+logger = logging.getLogger(__name__)
 
-def create_test_app() -> FastAPI:
-    app = FastAPI()
-    app.include_router(router)
-
-    return app
-
-
-app = create_test_app()
-client = TestClient(app)
-
-USER_MODEL = User(
+USER_MODEL = UserBase(
     name="bob",
     email="bob@microsoft.usa",
-    phone_number="90909090",
-    country_code="SG",
+    full_name="90909090",
+    is_superuser=False,
 )
 
 
 @pytest.fixture
-def user_model() -> User:
+def user_model() -> UserBase:
     return USER_MODEL
 
 
 @pytest.fixture
-def user_schema() -> UserDB:
-    return UserDB(
+def user_schema() -> UserDBSchema:
+    return UserDBSchema(
+        user_id=1,
         name="bob",
         email="bob@microsoft.usa",
-        phone_number="90909090",
-        country_code="SG",
+        full_name="90909090",
+        is_superuser=False,
     )
 
 
 class TestUserRouter:
     def test_user_create_valide(
-        self, user_model: User, user_schema: UserDB
+        self,
+        client: TestClient,
+        user_model: UserBase,
+        user_schema: UserDBSchema,
     ) -> None:
-
+        print(f"in test {os.environ.get('TESTING', 'PROD')}")
         response = client.post(
-            "/users",
+            "/users/",
             json={
                 "name": "bob",
                 "email": "bob@microsoft.usa",
-                "phone_number": "90909090",
-                "country_code": "SG",
+                "full_name": "90909090",
+                "is_superuser": False,
+                "password": "nnnn",
             },
         )
+
+        logger.error(response.content)
         assert response.status_code == status.HTTP_200_OK
         assert response.json() == user_schema.__dict__

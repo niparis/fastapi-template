@@ -1,3 +1,4 @@
+import os
 import secrets
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
@@ -17,13 +18,19 @@ class Settings(BaseSettings):
     DB_HOST: str = "localhost"
     DB_PORT: int = 5432
 
-    # SQLALCHEMY_DATABASE_URI: PostgresDsn = f'postgres://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+    DB_NAME_TEST: Optional[str] = None
+
     SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
 
     @validator("SQLALCHEMY_DATABASE_URI", pre=True)
     def assemble_db_connection(
         cls, v: Optional[str], values: Dict[str, Any]
     ) -> Any:
+        if os.environ.get("TESTING") == "Test":
+            db_name = f"/{values.get('DB_NAME_TEST') or ''}"
+        else:
+            db_name = f"/{values.get('DB_NAME') or ''}"
+
         if isinstance(v, str):
             return v
         return PostgresDsn.build(
@@ -32,7 +39,7 @@ class Settings(BaseSettings):
             password=values.get("DB_PASSWORD"),
             host=values.get("DB_HOST"),
             port=str(values.get("DB_PORT")),
-            path=f"/{values.get('DB_NAME') or ''}",
+            path=db_name,
         )
 
     SENTRY_DSN: Optional[str] = None
