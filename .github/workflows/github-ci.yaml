@@ -1,4 +1,4 @@
-name: Python package
+name: Tests
 
 on:
     push:
@@ -23,6 +23,11 @@ jobs:
        python -m pip install --upgrade pip
        pip install poetry==1.0.9
        poetry install
+    - name: cache pre-commit
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache/pre-commit
+        key: pre-commit|${{ matrix.python }}|${{ hashFiles('.pre-commit-config.yaml') }}
     - name: Install run pre-commit
       run: |
        poetry run pre-commit install
