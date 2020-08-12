@@ -3,6 +3,10 @@
 *__pycache__*
 *.idea*
 
+# test
+.mypy_cache
+.pytest_cache
+
 # Environment Files
 /.env
 
