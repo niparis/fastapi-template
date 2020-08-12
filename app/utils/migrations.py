@@ -1,5 +1,8 @@
 import io
 import os
+from contextlib import contextmanager
+
+from sqlbag.createdrop import create_database, drop_database
 
 
 def export_all_tables(settings):
@@ -22,6 +25,19 @@ def export_all_tables(settings):
     print("SQLAlchemy tables have been updated")
 
 
+@contextmanager
+def temporary_postgres_database(
+    host: str, username: str, password: str, dbname: str = "temp-db"
+):
+    url = f"postgres://{username}:{password}@{host}:5432/{dbname}"
+    try:
+        create_database(url)
+        print(f"created {url}")
+        yield url
+    finally:
+        drop_database(url)
+
+
 def sync(settings, silent: bool = True):
     """
         settings: a framework settings object
@@ -34,7 +50,14 @@ def sync(settings, silent: bool = True):
     ) as f:
         ddl = f.read()
 
-    with temporary_db("postgresql") as TEMP_DB_URL:
+    # creates main db if needed
+    create_database(settings.SQLALCHEMY_DATABASE_URI)
+
+    with temporary_postgres_database(
+        host=settings.DB_HOST,
+        username=settings.DB_USER,
+        password=settings.DB_PASSWORD,
+    ) as TEMP_DB_URL:
         with S(TEMP_DB_URL) as s:
             s.execute(ddl)
 

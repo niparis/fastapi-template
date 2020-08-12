@@ -85,4 +85,4 @@ not_skip = "__init__.py"
 use_parentheses = true
 include_trailing_comma = true
 force_grid_wrap = 0
-known_third_party = ["click", "databases", "fastapi", "orjson", "pydantic", "pytest", "sentry_sdk", "sqlalchemy", "starlette", "tomlkit"]
+known_third_party = ["click", "databases", "fastapi", "orjson", "pydantic", "pytest", "sentry_sdk", "sqlalchemy", "sqlbag", "starlette", "tomlkit"]

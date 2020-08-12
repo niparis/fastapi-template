@@ -30,12 +30,12 @@ https://postgresapp.com
 ## first time
 
 1. Create a copy of the settings (`cp .dist.env .env`). Modify the database user (`DB_USER`) - unless you're bob - , it should be your system user if you're using postgresapp.
-2. Create a database (`psql -c "create database asyncfast;"`). This requires having postgres running (use postgresapp).
+<!-- 2. Create a database (`psql -c "create database asyncfast;"`). This requires having postgres running (use postgresapp). -->
 3. Install depencies and create a virtual environment (`poetry install`)
 4. Activate the virtual environment (`poetry shell`)
 5. Activate pre-commit hooks (after `poetry shell`, run `pre-commit install`).
 6. Update the database schema and genrate the SQLalchmey tables (`poetry run task manage sync-db`)
-    - ==> go to `sqla_tables.py`, add `, Text` at the end of line 2
+    <!-- - ==> go to `sqla_tables.py`, add `, Text` at the end of line 2 -->
 7. Run the app with the development server (`poetry run task app`)
 
 Go to http://127.0.0.1:8000/doc for the swagger doc

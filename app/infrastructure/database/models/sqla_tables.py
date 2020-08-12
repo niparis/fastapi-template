@@ -31,14 +31,14 @@ t_rdbms_connections = Table(
     ),
     Column("client_id", BigInteger),
     Column("engine", String, nullable=False),
+    Column(
+        "rdbms_role", Enum("SOURCE", "SINK", name="rdbms_role"), nullable=False
+    ),
     Column("host", String, nullable=False),
     Column("username", String, nullable=False),
     Column("password", String, nullable=False),
     Column("port", Integer, nullable=False),
     Column("connection_schema", JSONB(astext_type=Text())),
-    Column(
-        "rdbms_role", Enum("SOURCE", "SINK", name="rdbms_role"), nullable=False
-    ),
     schema="public",
 )
 
