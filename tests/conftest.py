@@ -28,7 +28,9 @@ def prepare_database() -> Generator:
     create_database(
         str(settings.SQLALCHEMY_DATABASE_URI), wipe_if_existing=False
     )
+    print("\ndatabase created")
     sync(settings, silent=True)
+    print("\ndatabase synced")
     yield
 
     drop_database(str(settings.SQLALCHEMY_DATABASE_URI))
