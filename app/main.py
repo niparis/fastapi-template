@@ -23,6 +23,7 @@ logger = logging.getLogger(__name__)
 
 
 def create_app() -> FastAPI:
+
     if settings.SENTRY_DSN.__str__() not in ("None", ""):
         initialize_sentry(
             dsn=settings.SENTRY_DSN.__str__(),

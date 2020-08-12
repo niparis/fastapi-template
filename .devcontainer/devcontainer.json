@@ -1,0 +1,22 @@
+{
+	"name": "Ingestor Service",
+	"dockerComposeFile": "docker-compose.yml",
+	"shutdownAction": "stopCompose",
+	"service": "app",
+    "workspaceFolder": "/workspace",
+    "settings": {
+		"python.languageServer": "Pylance"
+    },    
+	"extensions": [
+		"ms-python.python",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"eamodio.gitlens",
+		"deerawan.vscode-dash",
+		"mhutchie.git-graph",
+		"ms-python.vscode-pylance",
+		"aron-bond.better-comments",
+		"kevinrose.vsc-python-indent",
+		"sdras.night-owl"
+	],
+	"postStartCommand": "pre-commit install"
+}
