@@ -13,6 +13,13 @@ def manage() -> None:
 
 
 @manage.command(help="init db")
+def dbconn() -> None:
+    from app.core.config import settings
+
+    print(settings.SQLALCHEMY_DATABASE_URI)
+
+
+@manage.command(help="init db")
 def sync_db() -> None:
     """
         Syncs the DDL with the database, and generates sqlalchemy models

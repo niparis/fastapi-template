@@ -83,6 +83,15 @@ jobs:
         name: lint-results
         path: lint-results.txt
 
+    - name: show connection string
+      env:
+        DB_NAME: asyncfast
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DB_HOST: localhost
+      run: |
+        poetry run task manage dbconn
+
     - name: Run tests
       env:
         DB_NAME: asyncfast
