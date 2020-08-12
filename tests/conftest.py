@@ -26,6 +26,9 @@ def prepare_database() -> Generator:
 
     from sqlbag.createdrop import create_database, drop_database
 
+    print("\nprep database")
+    print(settings.SQLALCHEMY_DATABASE_URI)
+
     create_database(
         str(settings.SQLALCHEMY_DATABASE_URI), wipe_if_existing=False
     )

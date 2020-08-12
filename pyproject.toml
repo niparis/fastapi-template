@@ -49,7 +49,7 @@ sqlalchemy-stubs = "^0.3"
 # Launch Commands for Local Development
 app = "uvicorn app.main:app --reload"
 app-prod = 'gunicorn -k uvicorn.workers.UvicornWorker -c app/core/gunicorn_conf.py app.main:app'
-test = "pytest --verbose --cov=app --cov=tests --cov-report=term-missing --cov-report=xml:.artifacts/coverage.xml --junit-xml=.artifacts/tests.xml"
+test = "pytest -s --verbose --cov=app --cov=tests --cov-report=term-missing --cov-report=xml:.artifacts/coverage.xml --junit-xml=.artifacts/tests.xml"
 # migrations
 manage = "python app/manage.py"
 # Docker-Compose Tasks
