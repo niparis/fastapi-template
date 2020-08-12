@@ -8,6 +8,7 @@ from app.domain.rdbms_connections.rdbms_connections_schema import (
     RDBMSConnectionsDB,
 )
 from app.infrastructure.database.models.sqla_tables import t_rdbms_connections
+from app.utils.database_crud import load_query_in_entity
 
 
 class RDBMSConnectionsQueries:
@@ -25,9 +26,9 @@ class RDBMSConnectionsQueries:
         query = select([t_rdbms_connections]).where(
             t_rdbms_connections.c.connection_id == connection_id
         )
-        result_proxy = await db.fetch_all(query=query)
-        ddd = [dict(zip(row.keys(), row.values())) for row in result_proxy]
-        return [RDBMSConnectionsDB(**k) for k in ddd]
+        return await load_query_in_entity(
+            db=db, query=query, entity=RDBMSConnectionsDB
+        )
 
     async def delete_connection_by_id(self, connection_id: int) -> bool:
         query = t_rdbms_connections.delete().where(

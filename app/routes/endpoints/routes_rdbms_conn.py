@@ -35,7 +35,7 @@ async def create_rdbmsconn(
 @router.get(
     "/{conn_id}",
     response_model=RDBMSConnectionsDB,
-    response_class=JSONResponse,
+    response_class=ORJSONResponse,
     summary="Gets an RDBMS connection",
     response_description="The connections information (without password)",
 )

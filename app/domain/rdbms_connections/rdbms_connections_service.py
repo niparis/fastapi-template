@@ -6,10 +6,13 @@ from app.domain.rdbms_connections.rdbms_connections_schema import (
     RDBMSConnectionsCreateSchema,
     RDBMSConnectionsDB,
 )
+from app.infrastructure.database.queries.rdbms_connection import (
+    RDBMSConnectionsQueries,
+)
 
 
 class RDBMSConnectionsService:
-    def __init__(self, rdms_queries: Any):
+    def __init__(self, rdms_queries: RDBMSConnectionsQueries):
         self.__rdbms_queries = rdms_queries
 
     async def create_rdbmsconn(

@@ -36,20 +36,3 @@ def prepare_database() -> Generator:
     yield
 
     drop_database(str(settings.SQLALCHEMY_DATABASE_URI))
-
-    # db = Database(str(settings.SQLALCHEMY_DATABASE_URI), force_rollback=True)
-
-    # # Re-contruct the database for each run
-
-    # yield db
-
-    # dburl = apisecrets.DATABASE_URL
-    # create_engine(dburl)
-    # assert not database_exists(
-    #     dburl), 'Test database already exists. Aborting tests.'
-    # create_database(dburl)
-    # alembic_config = Config("alembic.ini")
-    # command.upgrade(alembic_config, "head")
-    # # command.history(alembic_config, indicate_current=True)
-    # yield
-    # drop_database(dburl)
