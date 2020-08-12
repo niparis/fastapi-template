@@ -7,10 +7,6 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
-def pytest_generate_tests(metafunc):
-    os.environ["TESTING"] = "True"
-
-
 @pytest.fixture(scope="module")
 def client() -> Generator:
     with TestClient(app) as c:

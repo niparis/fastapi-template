@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     def assemble_db_connection(
         cls, v: Optional[str], values: Dict[str, Any]
     ) -> Any:
-        if os.environ.get("TESTING") == "Test":
+        if os.environ.get("TESTING") == "true":
             db_name = f"/{values.get('DB_NAME_TEST') or ''}"
         else:
             db_name = f"/{values.get('DB_NAME') or ''}"

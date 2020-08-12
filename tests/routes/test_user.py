@@ -63,6 +63,5 @@ class TestUserRouter:
             },
         )
 
-        logger.error(response.content)
         assert response.status_code == status.HTTP_200_OK
         assert response.json() == user_schema.__dict__
