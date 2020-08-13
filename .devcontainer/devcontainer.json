@@ -1,5 +1,5 @@
 {
-	"name": "Ingestor Service",
+	"name": "FastApi Template",
 	"dockerComposeFile": "docker-compose.yml",
 	"shutdownAction": "stopCompose",
 	"service": "app",

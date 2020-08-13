@@ -13,7 +13,8 @@ ENV SHELL /bin/bash
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
     curl \
-    git
+    git \
+    ssh
 
 RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 
@@ -23,5 +24,4 @@ COPY poetry.lock poetry.lock
 RUN /bin/bash -c "source $HOME/.poetry/env && poetry config virtualenvs.create false && poetry install --no-ansi --no-root"
 
 RUN echo export PATH=$PATH:$HOME/.poetry/bin >> ~/.bashrc
-
 
