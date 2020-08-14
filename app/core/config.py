@@ -32,10 +32,8 @@ class Settings(BaseSettings):
 
     DB_NAME_TEST: Optional[str] = None
 
-    SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
-
     @property
-    def SQLALCHEMY_DATABASE_URI(self):
+    def SQLALCHEMY_DATABASE_URI(self) -> str:
         if self.TESTING:
             db_name = f"{self.DB_NAME_TEST}"
         else:
