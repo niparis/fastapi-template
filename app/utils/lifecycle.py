@@ -32,10 +32,25 @@ def get_version_and_service_name() -> Tuple[str, str]:
     return str(pkg_meta["version"]), str(pkg_meta["name"])
 
 
+def generate_requirements_txt():
+    subprocess.run(
+        [
+            "poetry",
+            "export",
+            "-o",
+            "requirements.txt",
+            "-f",
+            "requirements.txt",
+            "--without-hashes",
+        ]
+    )
+
+
 def commit_new_version_and_push() -> None:
     version, _ = get_version_and_service_name()
 
     if ask_confirm(f"Commit and push new version (v{version})?"):
+        generate_requirements_txt()
         subprocess.run(["git", "add", "-u"])
         subprocess.run(["git", "commit", "-m", f"bump version to v{version}"])
         subprocess.run(
