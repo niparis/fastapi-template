@@ -15,15 +15,14 @@ from app.core.config import settings
 from app.core.db import db
 from app.utils.middleware import PerformanceMonitoringMiddleware
 from app import __version__, SERVICE_NAME
-from app.utils.exception_handlers import not_found_exception_handler
-from app.utils.exceptions import EntityNotFound
+from app.utils.exceptions_http import register_exception_handlers
 
 
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
 def create_app() -> FastAPI:
-
     if settings.SENTRY_DSN.__str__() not in ("None", ""):
         initialize_sentry(
             dsn=settings.SENTRY_DSN.__str__(),
@@ -58,8 +57,8 @@ def create_app() -> FastAPI:
 
     app.add_middleware(PerformanceMonitoringMiddleware)
 
-    # Exceptions handles
-    app.add_exception_handler(EntityNotFound, not_found_exception_handler)
+    # Exceptions handlers
+    app = register_exception_handlers(app)
 
     return app
 

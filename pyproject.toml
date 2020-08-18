@@ -10,14 +10,13 @@ fastapi = "^0.54.1"
 sqlalchemy-utils = "^0.36.5"
 psycopg2-binary = "^2.8.5"
 uvicorn = "^0.11.5"
-email_validator = "^1.1.0"
 sentry-sdk = "^0.14.3"
-gino-starlette = "^0.1.1"
 pydantic = {extras = ["dotenv"], version = "^1.6.1"}
 databases = {extras = ["postgresql"], version = "^0.3.2"}
 gunicorn = "^20.0.4"
-tomlkit = "^0.7.0"
 orjson = "^3.3.0"
+tomlkit = "^0.7.0"
+asyncpg = "0.21.0"
 
 [tool.poetry.dev-dependencies]
 black = "^19.10b0"
@@ -43,18 +42,17 @@ vulture = "^1.6"
 radon = "^4.2.0"
 pep8-naming = "^0.11.1"
 sqlalchemy-stubs = "^0.3"
-orjson = "^3.3.0"
 
 [tool.taskipy.tasks]
 # Launch Commands for Local Development
 app = "uvicorn app.main:app --reload"
+app-noreload = "uvicorn app.main:app"
 app-prod = 'gunicorn -k uvicorn.workers.UvicornWorker -c app/core/gunicorn_conf.py app.main:app'
 test = "export TESTING=true && pytest -s --verbose --cov=app --cov=tests --cov-report=term-missing --cov-report=xml:.artifacts/coverage.xml --junit-xml=.artifacts/tests.xml"
 # migrations
-manage = "python app/manage.py"
-# Docker-Compose Tasks
-compose-up = "docker-compose -f setup/docker/docker-compose.local.yml -f setup/docker/docker-compose.yml up --build"
-compose-down = "docker-compose -f setup/docker/docker-compose.local.yml -f setup/docker/docker-compose.yml down --remove-orphans"
+manage = "python app/utils/manage.py"
+# git related
+delete-merged-branches = 'git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 
 [tool.flake8]
 ignore = "E402, E203, E266, E501, W503, F403, F401, app/infrastructure/database/migrations/"
@@ -75,7 +73,7 @@ exclude = '''
   | dist
   | .scripts
   | .git-crypt
-  | app/infrastructure/database/sqla_tables.py
+  | app/infrastructure/database/models/sqla_tables.py
 )/
 '''
 

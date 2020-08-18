@@ -11,9 +11,6 @@ services:
       - ~/.gitconfig:/root/.gitconfig
       - ..:/workspace
     command: sleep infinity
-    # env_file: ../.env
-    environment:
-      DJANGO_SETTINGS_MODULE: tweeter3.settings.devcontainer
 
   db:
     image: postgres:12.3

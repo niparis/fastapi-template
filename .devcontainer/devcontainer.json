@@ -1,9 +1,9 @@
 {
-	"name": "FastApi Template",
+	"name": "Fast-api-template",
 	"dockerComposeFile": "docker-compose.yml",
 	"shutdownAction": "stopCompose",
 	"service": "app",
-    "workspaceFolder": "/workspace",
+	"workspaceFolder": "/workspace",
     "settings": {
 		"python.languageServer": "Pylance"
     },    
@@ -16,7 +16,8 @@
 		"ms-python.vscode-pylance",
 		"aron-bond.better-comments",
 		"kevinrose.vsc-python-indent",
-		"sdras.night-owl"
+		"bungcip.better-toml",
+		"gruntfuggly.todo-tree"
 	],
 	"postStartCommand": "pre-commit install"
 }

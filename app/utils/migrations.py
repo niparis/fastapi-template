@@ -38,12 +38,21 @@ def temporary_postgres_database(
         drop_database(url)
 
 
-def sync(settings, silent: bool = True):
+def sync(settings, silent: bool = True, dropdb: bool = False):
     """
         settings: a framework settings object
+        silent: does not ask for confirmation
+        dropdb: drops your dev db. Useful when a migration is not compatible with existing data.
+
     """
-    from sqlbag import S, temporary_database as temporary_db
+    from sqlbag import S
     from migra import Migration
+
+    if dropdb:
+        print(f"Dropping your database at {settings.SQLALCHEMY_DATABASE_URI}")
+        if silent or input("Are you sure (type `yes` to continue)? ") == "yes":
+            drop_database(settings.SQLALCHEMY_DATABASE_URI)
+            create_database(settings.SQLALCHEMY_DATABASE_URI)
 
     with open(
         os.path.join(settings.DDL_PATH, "database-schema.sql"), "r"
