@@ -12,7 +12,7 @@ psycopg2-binary = "^2.8.5"
 uvicorn = "^0.11.5"
 sentry-sdk = "^0.14.3"
 pydantic = {extras = ["dotenv"], version = "^1.6.1"}
-databases = {extras = ["postgresql"], version = "^0.3.2"}
+databases = {extras = ["postgresql"], version = "^0.6.1"}
 gunicorn = "^20.0.4"
 orjson = "^3.3.0"
 tomlkit = "^0.7.0"

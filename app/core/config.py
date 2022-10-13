@@ -39,7 +39,7 @@ class Settings(BaseSettings):
         else:
             db_name = f"{self.DB_NAME}"
 
-        return f"postgres://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{db_name}?application_name={self.SERVICE_NAME}"
+        return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{db_name}?application_name={self.SERVICE_NAME}"
 
     SENTRY_DSN: Optional[str] = None
 
