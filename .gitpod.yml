@@ -1,0 +1,13 @@
+tasks:
+  - init: |
+      curl -sSL https://install.python-poetry.org | python3 -
+      poetry install      
+  - command: |
+      poetry run task manage sync-db
+      poetry run task app
+  
+image: gitpod/workspace-postgresql  
+ports:
+  - port: 8888
+    visibility: private
+    onOpen: open-preview
