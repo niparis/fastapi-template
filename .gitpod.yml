@@ -6,7 +6,9 @@ tasks:
       poetry run task manage sync-db
       poetry run task app
   
-image: gitpod/workspace-postgresql  
+image:
+  file: docker/Dockerfile
+  
 ports:
   - port: 8888
     visibility: private
